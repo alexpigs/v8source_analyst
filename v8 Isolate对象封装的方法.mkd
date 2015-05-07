@@ -25,7 +25,7 @@ functionC(){}
 
 所有v8::Isolate函数调用前，都会
 
-  i::Isolate* isolate = reinterpret_cast< i::Isolate** >(this);                                                                                                            
+  i::Isolate* isolate = reinterpret_cast< i::Isolate* >(this);                                                                                                            
   
   然后调用internal::isolate相对应的函数。
   
@@ -33,7 +33,7 @@ functionC(){}
   
   void v8::Isolate::Enter() {       
                    
- i::Isolate* isolate = reinterpret_cast< i::Isolate**>(this);                
+ i::Isolate* isolate = reinterpret_cast< i::Isolate*>(this);                
  
  isolate->Enter();    
  
