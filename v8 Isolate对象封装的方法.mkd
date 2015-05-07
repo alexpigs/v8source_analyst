@@ -1,0 +1,30 @@
+#V8中Isolate对象封装方法 
+####2015年05月08日
+刚开始阅读V8代码，比较疑惑
+v8::Isolate和v8::internal::Isolate的关系。
+
+翻代码看了一下
+
+v8::Isolate类其实是一个函数聚合类，如
+
+class Isolate{
+
+functionA(){}
+
+functionB(){}
+
+functionC(){}
+
+...
+
+}
+
+而v8::internal::Isolate其实才是真正的对象。
+
+为了只暴露v8::Isolate给上层调用，所以用v8::Isolate做了封装。
+
+所有v8::Isolate函数调用前，都会
+
+  i::Isolate* isolate = reinterpret_cast<< i::Isolate** >>(this);                                                                                                            
+  
+  然后调用internal::isolate相对应的函数。
